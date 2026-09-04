@@ -22,7 +22,7 @@
 ]]
 addon.name    = 'heaphjobs';
 addon.author  = 'Heaph, with ADA';
-addon.version = '2.1';
+addon.version = '2.1.1';
 addon.desc    = "Heaph's Harem point board, in game.";
 addon.link    = 'https://heaphpoints.com';
 
@@ -145,16 +145,33 @@ local function dechunk(body)
     return table.concat(out);
 end
 
--- the certificate must carry our host name; chain validity alone would accept any real site
+-- the certificate must carry our host name; chain validity alone would accept any real site.
+-- LuaSec returns extensions keyed by name; older builds return a list. Both are read.
+local function name_ok(alt)
+    return alt == HOST or alt == '*.' .. HOST;
+end
 local function check_name(s)
     local cert = s:getpeercertificate();
     if (not cert) then error('tls: no certificate'); end
     local found = false;
-    for _, ext in ipairs(cert:extensions() or {}) do
-        if (ext.name == 'subjectAltName') then
+    local exts = cert:extensions() or {};
+    for k, ext in pairs(exts) do
+        if (type(ext) == 'table' and (k == 'subjectAltName' or ext.name == 'subjectAltName' or ext.oid == '2.5.29.17')) then
             for _, alt in ipairs(ext.dNSName or {}) do
-                if (alt == HOST or alt == '*.' .. HOST) then found = true; end
+                if (name_ok(alt)) then found = true; end
             end
+            if (not found) then
+                for _, v in pairs(ext) do
+                    if (type(v) == 'table') then for _, alt in ipairs(v) do if (name_ok(alt)) then found = true; end end
+                    elseif (type(v) == 'string' and name_ok(v)) then found = true; end
+                end
+            end
+        end
+    end
+    if (not found) then
+        -- no usable SAN: accept a matching common name
+        for _, part in ipairs(cert:subject() or {}) do
+            if (type(part) == 'table' and (part.name == 'commonName' or part.oid == '2.5.4.3') and name_ok(part.value)) then found = true; end
         end
     end
     if (not found) then error('tls: certificate is not for ' .. HOST); end
