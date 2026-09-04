@@ -22,13 +22,13 @@ double-click it. It finds your HorizonXI folder, installs the addon, and sets it
 to load with the game. Run it again any time to update. Windows may ask you to
 confirm running a new file; the script it runs is `install.ps1` in this repo.
 
-**By hand:** unzip `heaphjobs.zip` into `Gameddons` so the files sit exactly here
+**By hand:** unzip `heaphjobs.zip` into `Game\addons` so the files sit exactly here
 (the folder name must be `heaphjobs`, not `heaphjobs-main` or `heaphjobs\heaphjobs`):
 
-    Gameddons\heaphjobs\heaphjobs.lua
-    Gameddons\heaphjobsssets\cacert.pem
-    Gameddons\heaphjobsssets\moogle_icon.png
-    Gameddons\heaphjobsssets\paper_tex.jpg
+    Game\addons\heaphjobs\heaphjobs.lua
+    Game\addons\heaphjobs\assets\cacert.pem
+    Game\addons\heaphjobs\assets\moogle_icon.png
+    Game\addons\heaphjobs\assets\paper_tex.jpg
 
 Then in game: `/addon load heaphjobs`. To load it every time, add that line to
 `Game\scripts\default.txt`.
