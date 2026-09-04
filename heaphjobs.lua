@@ -22,7 +22,7 @@
 ]]
 addon.name    = 'heaphjobs';
 addon.author  = 'Heaph, with ADA';
-addon.version = '2.1.1';
+addon.version = '2.1.2';
 addon.desc    = "Heaph's Harem point board, in game.";
 addon.link    = 'https://heaphpoints.com';
 

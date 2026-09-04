@@ -16,19 +16,24 @@ Reading needs nothing. Claiming, posting and asking need your in-game key.
 
 ## Install
 
-Unzip so that the files sit exactly here (the folder name must be `heaphjobs`,
-not `heaphjobs-main` or `heaphjobs\heaphjobs`):
+**One click:** download `install.bat` from the
+[latest release](https://github.com/lost-rabbit/heaphjobs/releases/latest) and
+double-click it. It finds your HorizonXI folder, installs the addon, and sets it
+to load with the game. Run it again any time to update. Windows may ask you to
+confirm running a new file; the script it runs is `install.ps1` in this repo.
 
-    Game\addons\heaphjobs\heaphjobs.lua
-    Game\addons\heaphjobs\assets\cacert.pem
-    Game\addons\heaphjobs\assets\moogle_icon.png
-    Game\addons\heaphjobs\assets\paper_tex.jpg
+**By hand:** unzip `heaphjobs.zip` into `Gameddons` so the files sit exactly here
+(the folder name must be `heaphjobs`, not `heaphjobs-main` or `heaphjobs\heaphjobs`):
 
-Then in game:
+    Gameddons\heaphjobs\heaphjobs.lua
+    Gameddons\heaphjobsssets\cacert.pem
+    Gameddons\heaphjobsssets\moogle_icon.png
+    Gameddons\heaphjobsssets\paper_tex.jpg
 
-    /addon load heaphjobs
+Then in game: `/addon load heaphjobs`. To load it every time, add that line to
+`Game\scripts\default.txt`.
 
-To load it every time, add that line to `Game\scripts\default.txt`.
+The full walkthrough, from install to your first claim, is in [GUIDE.md](GUIDE.md).
 
 ## Your key
 
